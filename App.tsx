@@ -8,7 +8,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 const styles = StyleSheet.create({
@@ -53,8 +52,7 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text style={styles.sectionTitle}>Hello world sqs</Text>
-          <Text style={styles.sectionTitle}>Hello world 2</Text>
+          <Text style={styles.sectionTitle}>Hello world </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
