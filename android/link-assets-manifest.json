@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/kronaOneRegular.ttf",
+      "sha1": "5e5fc620063840e5434fe57d990ef978d479139b"
+    },
+    {
+      "path": "assets/fonts/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf",
+      "sha1": "caa86e5eee280d876dc54dc331df8ceaa4b9fa6f"
+    }
+  ]
+}
