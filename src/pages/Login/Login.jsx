@@ -27,7 +27,6 @@ const Login = ({navigation}) => {
     <View style={StylesLogin.maincontainer}>
       <View style={StylesLogin.blocInput}>
         <Text style={StylesLogin.text}>Smart Task </Text>
-
         <View style={StylesLogin.blc}>
           <TextInput
             placeholder="Identifiant"
@@ -47,14 +46,13 @@ const Login = ({navigation}) => {
             placeholderTextColor={'rgba(255,255,255,0.3)'}
           />
         </View>
-
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Main');
           }}
           style={StylesLogin.button}>
           <View>
-            <Text style={StylesLogin.btnContent}>se connecter</Text>
+            <Text style={StylesLogin.btnContent}>Se Connecter </Text>
           </View>
         </TouchableOpacity>
       </View>

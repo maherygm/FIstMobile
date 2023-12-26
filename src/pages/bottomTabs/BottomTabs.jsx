@@ -2,12 +2,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {Component} from 'react';
 import Home from '../Home/Home';
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Chat from '../chat/Chat';
 import Settings from '../settings/Settings';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {COLORS} from '../../Assets/styles/constatantes';
+import styleBottomTabs from './styleBottomTabs';
 
 const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
@@ -17,14 +18,29 @@ const BottomTabs = () => {
       screenOptions={{
         tabBarActiveTintColor: COLORS.primaryColor,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: COLORS.secondaryColor,
+          height: 67,
+        },
       }}>
       <Tab.Screen
         name="Profile"
         component={Home}
         options={{
           tabBarLabel: 'Home',
+
           tabBarIcon: ({color, size}) => {
-            <MaterialCommunityIcons name="account" color={color} size={size} />;
+            return (
+              <Image
+                style={styleBottomTabs.icons}
+                source={require('../../Assets/img/icons8_home_32px.png')}
+              />
+            );
+          },
+
+          tabBarActiveBackgroundColor: COLORS.backgroundColor,
+          tabBarLabelStyle: {
+            fontSize: 16, // Taille de la police des libellés
           },
         }}
       />
@@ -34,7 +50,16 @@ const BottomTabs = () => {
         options={{
           tabBarLabel: 'Message',
           tabBarIcon: ({color, size}) => {
-            <MaterialCommunityIcons name="chat" color={color} size={size} />;
+            return (
+              <Image
+                style={styleBottomTabs.icons}
+                source={require('../../Assets/img/icons8_chat_32px.png')}
+              />
+            );
+          },
+          tabBarActiveBackgroundColor: COLORS.backgroundColor,
+          tabBarLabelStyle: {
+            fontSize: 16, // Taille de la police des libellés
           },
         }}
       />
@@ -42,9 +67,18 @@ const BottomTabs = () => {
         name="settings"
         component={Settings}
         options={{
-          tabBarLabel: 'Paramettre',
+          tabBarLabel: 'Parametre',
           tabBarIcon: ({color, size}) => {
-            <MaterialCommunityIcons name="account" color={color} size={size} />;
+            return (
+              <Image
+                style={styleBottomTabs.icons}
+                source={require('../../Assets/img/icons8_settings_32px.png')}
+              />
+            );
+          },
+          tabBarActiveBackgroundColor: COLORS.backgroundColor,
+          tabBarLabelStyle: {
+            fontSize: 16, // Taille de la police des libellés
           },
         }}
       />

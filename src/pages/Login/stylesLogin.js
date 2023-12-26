@@ -41,7 +41,9 @@ const StylesLogin = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     marginTop: 20,
-    width: 160,
+    width: '60%',
+    elevation: 1,
+    paddingVertical: 16,
   },
   btnContent: {
     color: COLORS.backgroundColor,

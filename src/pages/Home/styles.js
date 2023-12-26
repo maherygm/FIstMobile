@@ -18,6 +18,10 @@ const dashBoardStyles = StyleSheet.create({
     color: COLORS.fontColor,
     fontSize: 18,
   },
+  flatlist: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
   userImg: {
     width: 50,
     height: 50,
@@ -38,6 +42,70 @@ const dashBoardStyles = StyleSheet.create({
   },
   sampleText: {
     color: COLORS.fontColor,
+  },
+
+  blocquestion: {
+    padding: 10,
+  },
+  mainContainerCard: {
+    width: 300,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  cardMain: {
+    width: '100%',
+    borderRadius: 10,
+    backgroundColor: COLORS.secondaryColor,
+  },
+  imgCardMain: {
+    width: '100%',
+    borderRadius: 10,
+  },
+  texteCardMain: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    width: '100%',
+    borderRadius: 10,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+    padding: 10,
+    color: COLORS.fontColor,
+  },
+  separator: {
+    textAlign: 'right',
+    paddingRight: 10,
+    color: COLORS.primaryColor,
+  },
+  mainContainercrd: {
+    padding: 10,
+    width: '100%',
+  },
+  petiteCard: {
+    width: '100%',
+    backgroundColor: COLORS.secondaryColor,
+    padding: 10,
+    borderRadius: 20,
+    flexDirection: 'row',
+    overflow: 'hidden',
+    gap: 10,
+  },
+  bloc: {
+    width: '100%',
+  },
+  cardTexte: {
+    width: '80%',
+  },
+
+  beforeseparato: {
+    paddingLeft: 10,
+  },
+
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 10,
+    width: '80%',
+    borderRadius: 20,
   },
 });
 export default dashBoardStyles;

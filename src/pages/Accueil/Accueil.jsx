@@ -16,7 +16,7 @@ const Accueil = ({navigation}) => {
   return (
     <View>
       <Image
-        source={require('../../Assets/img/fond2.jpg')}
+        source={require('../../Assets/img/fond.jpg')}
         style={stylesAccueil.imageFond}
       />
       <View style={stylesAccueil.mainContent}>
