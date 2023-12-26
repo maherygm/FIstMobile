@@ -1,14 +1,6 @@
 //import liraries
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  Image,
-  TouchableHighlight,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import stylesAccueil from './stylesAccueil';
 
 // create a component
@@ -25,7 +17,6 @@ const Accueil = ({navigation}) => {
           partagez, progressez, réussissez, inspirez.
         </Text>
         <Text style={stylesAccueil.text}>Smart Task</Text>
-
         <TouchableOpacity
           style={stylesAccueil.btnBegin}
           onPress={() => navigation.navigate('Login')}>
