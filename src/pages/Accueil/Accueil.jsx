@@ -1,10 +1,37 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {Component, useEffect, useState} from 'react';
+import {
+  View,
+  Button,
+  Text,
+  Image,
+  Animated,
+  TouchableOpacity,
+} from 'react-native';
 import stylesAccueil from './stylesAccueil';
 
 // create a component
 const Accueil = ({navigation}) => {
+  const value = useState(new Animated.Value(0))[0];
+  function moveBall() {
+    Animated.spring(value, {
+      toValue: 1,
+      // duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }
+  function unmoveBall() {
+    Animated.spring(value, {
+      toValue: 0,
+      // duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }
+
+  useEffect(() => {
+    moveBall();
+  });
+
   return (
     <View>
       <Image
@@ -19,12 +46,54 @@ const Accueil = ({navigation}) => {
         <Text style={stylesAccueil.text}>Smart Task</Text>
         <TouchableOpacity
           style={stylesAccueil.btnBegin}
-          onPress={() => navigation.navigate('Login')}>
+          onPress={() => {
+            console.log('hello');
+            navigation.navigate('Login');
+          }}>
           <View>
             <Text style={stylesAccueil.textCommencer}>Commencer</Text>
           </View>
         </TouchableOpacity>
       </View>
+
+      {/* <View>
+        <Animated.View
+          style={{
+            backgroundColor: 'crimson',
+            width: 100,
+            height: 100,
+            borderRadius: 100 / 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [
+              {
+                scale: value,
+              },
+            ],
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 32,
+            }}>
+            Hello
+          </Text>
+        </Animated.View>
+      </View>
+
+      <TouchableOpacity
+        style={{
+          marginTop: 100,
+          backgroundColor: 'blue',
+          padding: 10,
+        }}
+        onPress={moveBall}>
+        <Text style={{color: 'white'}}>come</Text>
+      </TouchableOpacity>
+      <Button
+        onPress={unmoveBall}
+        title="back"
+      /> */}
     </View>
   );
 };
