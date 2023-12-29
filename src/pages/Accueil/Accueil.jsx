@@ -12,6 +12,28 @@ import stylesAccueil from './stylesAccueil';
 
 // create a component
 const Accueil = ({navigation}) => {
+  const data = [
+    {
+      id: 1,
+      title: 'Hopital',
+      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
+    },
+    {
+      id: 2,
+      title: 'School',
+      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
+    },
+    {
+      id: 3,
+      title: 'Work',
+      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
+    },
+    {
+      id: 4,
+      title: 'University',
+      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
+    },
+  ];
   const value = useState(new Animated.Value(0))[0];
   function moveBall() {
     Animated.spring(value, {
@@ -30,6 +52,7 @@ const Accueil = ({navigation}) => {
 
   useEffect(() => {
     moveBall();
+    console.log('hello', <View />);
   });
 
   return (
