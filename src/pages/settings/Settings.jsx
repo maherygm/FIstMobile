@@ -1,5 +1,13 @@
-import React, {Component, useState} from 'react';
-import {View, Text, Animated, Button, TouchableOpacity} from 'react-native';
+import React, {Component, useRef, useState} from 'react';
+import {
+  ScrollView,
+  View,
+  Text,
+  Animated,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+import LottieView from 'lottie-react-native';
 
 const Settings = () => {
   const value = useState(new Animated.ValueXY({x: 0, y: 0}))[0];
@@ -14,8 +22,19 @@ const Settings = () => {
       useNativeDriver: false,
     }).start();
   }
+
+  const lotieRef = useRef(null);
+
+  function play() {
+    lotieRef.current.play();
+  }
+
+  function pause() {
+    lotieRef.current.pause();
+    alert('hello');
+  }
   return (
-    <View>
+    <ScrollView>
       <Animated.View style={value.getLayout()}>
         <View
           style={{
@@ -38,7 +57,20 @@ const Settings = () => {
       <TouchableOpacity onPress={moveBall}>
         <Text>Click me</Text>
       </TouchableOpacity>
-    </View>
+
+      <Button title="play" onPress={play} />
+      <Button title="pause" onPress={pause} />
+      <LottieView
+        ref={lotieRef}
+        source={require('../../Assets/loties/settingsLotie.json')}
+        style={{
+          width: 500,
+          height: 500,
+        }}
+        autoPlay
+        loop={false}
+      />
+    </ScrollView>
   );
 };
 
