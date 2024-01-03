@@ -22,6 +22,9 @@ import image2 from '../../Assets/img-2/480x320/img7.jpg';
 import image3 from '../../Assets/img-2/480x320/img8.jpg';
 import image4 from '../../Assets/img-2/480x320/img9.jpg';
 import DialogModal from '../../component/DialogModal/DialogModal';
+import LottieView from 'lottie-react-native';
+import {ToggleButton} from 'react-native-paper';
+import {COLORS} from '../../Assets/styles/constatantes';
 // create a component
 const Home = () => {
   const dataCard = [
@@ -81,46 +84,63 @@ const Home = () => {
   };
 
   const [showModal, setShowModal] = useState(false);
-
-  const scalevalue = React.useRef(new Animated.Value(0)).current;
-  const handleCloseModal = (state, setState) => {
-    setState(!state);
-    startAnimation();
+  const handleCloseModal = () => {
+    scaleDown();
+    setTimeout(() => {
+      setShowModal(false);
+    }, 200);
   };
-  const startAnimation = () => {
-    Animated.spring(scalevalue, {
+  const handleOpenModal = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      scaleUp();
+    }, 200);
+  };
+
+  const scaleC = useState(new Animated.Value(0))[0];
+
+  function scaleUp(params) {
+    console.log('monted', scaleC);
+    Animated.timing(scaleC, {
       toValue: 1,
-      duration: 300,
+      duration: 200,
       useNativeDriver: true,
     }).start();
-  };
-  useEffect(() => {
-    startAnimation();
-  });
-
+  }
+  function scaleDown(params) {
+    Animated.timing(scaleC, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+    console.log('demonted', scaleC);
+  }
+  const lotieRef = useRef(null);
   return (
     <>
       <DialogModal handleClose={handleCloseModal} visible={showModal}>
         <Animated.View
           style={[
             dashBoardStyles.modalContainer,
-            {transform: [{scale: scalevalue}]},
+            {
+              transform: [
+                {
+                  scale: scaleC,
+                },
+              ],
+            },
           ]}>
-          <TouchableOpacity
-            onPress={() => {
-              setShowModal(!showModal);
-            }}>
-            <Image
-              source={require('../../Assets/img/kid-1837375_640.png')}
-              style={dashBoardStyles.userImg}
-            />
-          </TouchableOpacity>
           <View>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae
-              vitae sit quam delectus. Reiciendis eaque consequatur laboriosam
-              aut temporibus in.
-            </Text>
+            <LottieView
+              ref={lotieRef}
+              source={require('../../Assets/loties/Animation - 1703874443033.json')}
+              style={{
+                width: 300,
+                height: 200,
+              }}
+              autoPlay
+              loop={false}
+            />
           </View>
         </Animated.View>
       </DialogModal>
@@ -129,17 +149,22 @@ const Home = () => {
           <Text style={dashBoardStyles.texte}>
             John Doe {showModal ? 'show' : 'Hide'}
           </Text>
-          <TouchableOpacity
-            onPress={() => {
-              setShowModal(!showModal);
-            }}>
+          <TouchableOpacity onPress={handleOpenModal}>
             <Image
               source={require('../../Assets/img/kid-1837375_640.png')}
               style={dashBoardStyles.userImg}
             />
           </TouchableOpacity>
         </View>
-
+        <View>
+          <Text>Hello</Text>
+          <Button
+            title="Ligth"
+            onPress={() => {
+              COLORS.secondaryColor = '#000';
+            }}
+          />
+        </View>
         <FlatList
           horizontal={true}
           data={fakeActivities}

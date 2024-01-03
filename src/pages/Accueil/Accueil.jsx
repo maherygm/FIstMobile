@@ -7,33 +7,16 @@ import {
   Image,
   Animated,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import stylesAccueil from './stylesAccueil';
 
 // create a component
 const Accueil = ({navigation}) => {
-  const data = [
-    {
-      id: 1,
-      title: 'Hopital',
-      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
-    },
-    {
-      id: 2,
-      title: 'School',
-      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
-    },
-    {
-      id: 3,
-      title: 'Work',
-      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
-    },
-    {
-      id: 4,
-      title: 'University',
-      text: 'lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas, dicta!',
-    },
-  ];
+  const {width, height} = Dimensions.get('window');
+
+  console.log('width', width);
+  console.log('heigth', height);
   const value = useState(new Animated.Value(0))[0];
   function moveBall() {
     Animated.spring(value, {
@@ -50,23 +33,69 @@ const Accueil = ({navigation}) => {
     }).start();
   }
 
-  useEffect(() => {
-    moveBall();
-    console.log('hello', <View />);
-  });
+  // useEffect(() => {
+  //   moveBall();
+  //   console.log('hello', <View />);
+  // });
 
+  const translate = useState(new Animated.Value(0))[0];
+  function handlePress(params) {
+    Animated.spring(translate, {
+      toValue: -width,
+      useNativeDriver: false,
+    }).start();
+  }
+  function handleBack(params) {
+    Animated.spring(translate, {
+      toValue: 0,
+      useNativeDriver: false,
+    }).start();
+  }
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+      }}>
       <Image
         source={require('../../Assets/img/fond.jpg')}
         style={stylesAccueil.imageFond}
       />
-      <View style={stylesAccueil.mainContent}>
+      <Animated.View
+        style={[
+          stylesAccueil.mainContent,
+          {
+            transform: [
+              {
+                translateX: translate,
+              },
+            ],
+            backgroundColor: 'crimson',
+          },
+        ]}>
+        <Text>Page 1</Text>
+
+        <Button title="step 2" onPress={handlePress} />
+      </Animated.View>
+      <Animated.View
+        style={[
+          stylesAccueil.mainContent,
+          {backgroundColor: 'blue'},
+          {
+            transform: [
+              {
+                translateX: translate,
+              },
+            ],
+            backgroundColor: 'blue',
+          },
+        ]}>
         <Text style={stylesAccueil.description}>
           Bienvenue ! Explorez, découvrez, simplifiez, épanouissez, connectez,
           partagez, progressez, réussissez, inspirez.
         </Text>
         <Text style={stylesAccueil.text}>Smart Task</Text>
+        <Button title="back" onPress={handleBack} />
         <TouchableOpacity
           style={stylesAccueil.btnBegin}
           onPress={() => {
@@ -77,7 +106,7 @@ const Accueil = ({navigation}) => {
             <Text style={stylesAccueil.textCommencer}>Commencer</Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
 
       {/* <View>
         <Animated.View

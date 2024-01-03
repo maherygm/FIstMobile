@@ -15,7 +15,7 @@ const App = () => {
         backgroundColor={COLORS.backgroundColor}
       />
       <Routes />
-      <Button onPress={connectToRemoteDebugger}>Debug</Button>
+      {/* <Button onPress={connectToRemoteDebugger}>Debug</Button> */}
     </View>
   );
 };
