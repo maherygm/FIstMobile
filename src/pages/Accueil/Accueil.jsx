@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useEffect, useRef, useState} from 'react';
 import {
   View,
   Button,
@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableOpacity,
   Dimensions,
+  PanResponder,
 } from 'react-native';
 import stylesAccueil from './stylesAccueil';
 
@@ -15,8 +16,8 @@ import stylesAccueil from './stylesAccueil';
 const Accueil = ({navigation}) => {
   const {width, height} = Dimensions.get('window');
 
-  console.log('width', width);
-  console.log('heigth', height);
+  // console.log('width', width);
+  // console.log('heigth', height);
   const value = useState(new Animated.Value(0))[0];
   function moveBall() {
     Animated.spring(value, {
@@ -51,6 +52,71 @@ const Accueil = ({navigation}) => {
       useNativeDriver: false,
     }).start();
   }
+
+  const pan = useState(new Animated.ValueXY({x: 0, y: 0}))[0];
+
+  useEffect(() => {
+    mycomponent.current.measure((fx, fy, width, height, px, py) => {
+      console.log("Position sur l'écran :", px, py);
+    });
+  });
+  const mycomponent = useRef(null);
+
+  const [swipUp, setswipUp] = useState(false);
+  const [swipdown, setdown] = useState(false);
+
+  function up(params) {
+    Animated.timing(pan, {
+      toValue: {
+        x: 0,
+        y: -170,
+      },
+      duration: 200,
+
+      useNativeDriver: false,
+    }).start();
+  }
+  function down(params) {
+    Animated.timing(pan, {
+      toValue: {
+        x: 0,
+        y: 0,
+      },
+      duration: 200,
+
+      useNativeDriver: false,
+    }).start();
+  }
+  const panResponder = useState(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, event) => {
+        const {dx, dy} = event;
+        // pan.x.setValue(event.dx);
+        // pan.y.setValue(event.dy);
+
+        mycomponent.current.measure((fx, fy, width, height, px, py) => {
+          console.log("Position sur l'écran :", px, py);
+        });
+        if (dy < 0) {
+          console.log('swip up');
+          // console.log(pan.y);
+          // pan.y.setValue(-170);
+          setswipUp(true);
+          up();
+        } else {
+          // console.log('swip down');
+          // pan.y.setValue(170);
+          down();
+        }
+      },
+      onPanResponderRelease: () => {
+        // pan.y.setValue(-170);
+        // pan.extractOffset();
+      },
+    }),
+  )[0];
+
   return (
     <View
       style={{
@@ -70,10 +136,24 @@ const Accueil = ({navigation}) => {
                 translateX: translate,
               },
             ],
-            backgroundColor: 'crimson',
+            backgroundColor: '#F1F2F3',
           },
         ]}>
         <Text>Page 1</Text>
+
+        <View
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: '#F1F2F3',
+            borderRadius: 100 / 2,
+            elevation: 10,
+            shadowColor: '#333',
+            shadowOffset: {width: 0, height: 5}, // Ajustez ces valeurs en conséquence
+            shadowOpacity: 0.5, // Ajustez cette valeur en conséquence (entre 0 et 1)
+            shadowRadius: 10,
+          }}
+        />
 
         <Button title="step 2" onPress={handlePress} />
       </Animated.View>
@@ -107,6 +187,34 @@ const Accueil = ({navigation}) => {
           </View>
         </TouchableOpacity>
       </Animated.View>
+
+      <Animated.View
+        ref={mycomponent}
+        style={{
+          width: width,
+
+          height: 200,
+          backgroundColor: '#fff',
+          position: 'absolute',
+          bottom: -170,
+          elevation: 10,
+
+          transform: [
+            {
+              translateY: pan.y,
+            },
+          ],
+
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
+
+          shadowColor: '#333',
+          shadowOffset: {width: 0, height: 5}, // Ajustez ces valeurs en conséquence
+          shadowOpacity: 0.5, // Ajustez cette valeur en conséquence (entre 0 et 1)
+          shadowRadius: 10,
+        }}
+        {...panResponder.panHandlers}
+      />
 
       {/* <View>
         <Animated.View
